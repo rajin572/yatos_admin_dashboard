@@ -1,7 +1,7 @@
 import {
+    AlertTriangle,
     Ban,
     CheckCircle2,
-    Info,
     ShieldCheck,
     Trash2,
     UserCheck,
@@ -48,25 +48,21 @@ function iconColor(variant: ConfirmVariant) {
 
 const variantConfig: Record<
     ConfirmVariant,
-    { defaultIcon: React.ReactNode; iconBg: string; confirmClass: string }
+    { iconBg: string; confirmClass: string }
 > = {
     danger: {
-        defaultIcon: <Trash2 className="size-7 text-destructive" />,
         iconBg: "bg-destructive/10",
         confirmClass: "bg-destructive hover:bg-destructive/90 text-white",
     },
     warning: {
-        defaultIcon: <XCircle className="size-7 text-amber-500" />,
         iconBg: "bg-amber-500/10",
         confirmClass: "bg-amber-500 hover:bg-amber-600 text-white",
     },
     success: {
-        defaultIcon: <CheckCircle2 className="size-7 text-emerald-500" />,
         iconBg: "bg-emerald-500/10",
         confirmClass: "bg-emerald-500 hover:bg-emerald-600 text-white",
     },
     info: {
-        defaultIcon: <Info className="size-7 text-primary" />,
         iconBg: "bg-primary/10",
         confirmClass: "",
     },
@@ -88,6 +84,7 @@ interface ConfirmModalProps<T> {
     withReason?: boolean;
     reasonLabel?: string;
     reasonRequired?: boolean;
+    warningText?: string;
 }
 
 function ConfirmModal<T>({
@@ -106,10 +103,10 @@ function ConfirmModal<T>({
     withReason = false,
     reasonLabel = "Reason",
     reasonRequired = true,
+    warningText,
 }: ConfirmModalProps<T>) {
     const config = variantConfig[variant];
-    const resolvedIcon =
-        icon ?? (iconPreset ? iconPresets[iconPreset](variant) : config.defaultIcon);
+    const resolvedIcon = icon ?? (iconPreset ? iconPresets[iconPreset](variant) : null);
 
     const schema = useMemo(
         () => confirmReasonSchema(reasonLabel, reasonRequired),
@@ -145,10 +142,9 @@ function ConfirmModal<T>({
             title=""
             maxWidth="sm:max-w-sm md:max-w-lg "
             footer={
-                <div className="flex gap-3 w-full pb-2">
+                <div className="flex justify-end gap-3 w-full">
                     <Button
                         variant="outline"
-                        className="flex-1"
                         onClick={handleCancel}
                         disabled={loading}
                     >
@@ -157,7 +153,7 @@ function ConfirmModal<T>({
                     <Button
                         type={withReason ? "submit" : "button"}
                         form={withReason ? "confirm-reason-form" : undefined}
-                        className={`flex-1 ${config.confirmClass}`}
+                        className={config.confirmClass}
                         onClick={withReason ? undefined : handleDirectConfirm}
                         disabled={loading}
                     >
@@ -166,16 +162,31 @@ function ConfirmModal<T>({
                 </div>
             }
         >
-            {/* Icon + title + description */}
-            <div className="flex flex-col items-center gap-4 text-center -mt-4">
-                <div className={`p-4 rounded-full ${config.iconBg}`}>
-                    {resolvedIcon}
+            {/* Title + description (with optional icon) */}
+            {resolvedIcon ? (
+                <div className="flex flex-col items-center gap-4 text-center -mt-4">
+                    <div className={`p-4 rounded-full ${config.iconBg}`}>
+                        {resolvedIcon}
+                    </div>
+                    <div className="space-y-1.5">
+                        <h2 className="text-xl font-semibold text-foreground">{title}</h2>
+                        <p className="text-sm text-muted-foreground">{description}</p>
+                    </div>
                 </div>
+            ) : (
                 <div className="space-y-1.5">
-                    <h2 className="text-xl font-semibold text-foreground">{title}</h2>
+                    <h2 className="text-lg font-semibold text-foreground">{title}</h2>
                     <p className="text-sm text-muted-foreground">{description}</p>
                 </div>
-            </div>
+            )}
+
+            {/* Warning banner */}
+            {warningText && (
+                <div className="mt-4 flex gap-2 items-start rounded-md border border-destructive/30 bg-destructive/5 p-3">
+                    <AlertTriangle className="size-4 text-destructive shrink-0 mt-0.5" />
+                    <p className="text-xs text-destructive">{warningText}</p>
+                </div>
+            )}
 
             {/* Reason form */}
             {withReason && (

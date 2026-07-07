@@ -1,4 +1,4 @@
-import ClientsPage from "@/pages/Clients/ClientsPage";
+import UserManagementPage from "@/pages/UserManagement/UserManagementPage";
 import OverviewPage from "@/pages/Overview/Overview";
 import OwnerManagementPage from "@/pages/OwnerManagement/OwnerManagementPage";
 import ListingsPage from "@/pages/Listings/ListingsPage";
@@ -38,7 +38,7 @@ export const adminRoutes = [
         title: "User Management",
         url: "user-management",
         icon: Users,
-        element: <ClientsPage />,
+        element: <UserManagementPage />,
       },
       {
         title: "Owner Management",
