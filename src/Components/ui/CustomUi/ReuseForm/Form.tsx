@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "../../select";
 import { Checkbox } from "../../checkbox";
+import { Switch } from "../../switch";
 import { CalendarIcon, ChevronDownIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import { MultiSelect } from "./MultiSelect";
 import { FileUpload } from "./FileUpload";
@@ -333,6 +334,21 @@ export const FormCheckbox: FormControlFunc = (props) => {
       {({ onChange, value, ...field }) => (
         <Checkbox
           className="border-secondary-color bg-base-color/5"
+          {...field}
+          checked={value}
+          onCheckedChange={onChange}
+        />
+      )}
+    </FormBase>
+  );
+};
+
+export const FormSwitch: FormControlFunc = (props) => {
+  return (
+    <FormBase {...props} horizontal>
+      {({ onChange, value, ...field }) => (
+        <Switch
+          className="data-[state=checked]:bg-secondary-color"
           {...field}
           checked={value}
           onCheckedChange={onChange}

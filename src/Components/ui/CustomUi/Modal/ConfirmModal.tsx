@@ -84,7 +84,7 @@ interface ConfirmModalProps<T> {
     withReason?: boolean;
     reasonLabel?: string;
     reasonRequired?: boolean;
-    warningText?: string;
+    warningText?: React.ReactNode;
 }
 
 function ConfirmModal<T>({
@@ -184,7 +184,7 @@ function ConfirmModal<T>({
             {warningText && (
                 <div className="mt-4 flex gap-2 items-start rounded-md border border-destructive/30 bg-destructive/5 p-3">
                     <AlertTriangle className="size-4 text-destructive shrink-0 mt-0.5" />
-                    <p className="text-xs text-destructive">{warningText}</p>
+                    <div className="text-xs text-destructive space-y-0.5">{warningText}</div>
                 </div>
             )}
 
