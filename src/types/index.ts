@@ -8,3 +8,5 @@ export * from "./payment.type";
 export * from "./review.type";
 export * from "./booking.type";
 export * from "./reportsAnalytics.type";
+export * from "./adminTeam.type";
+export * from "./legalDocuments.type";
