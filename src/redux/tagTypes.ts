@@ -7,6 +7,8 @@ export const tagTypes = {
   advertisement: "Advertisement",
   payment: "Payment",
   review: "Review",
+  booking: "Booking",
+  reportsAnalytics: "ReportsAnalytics",
 };
 
 export const tagTypesList = [
@@ -18,4 +20,6 @@ export const tagTypesList = [
   tagTypes.advertisement,
   tagTypes.payment,
   tagTypes.review,
+  tagTypes.booking,
+  tagTypes.reportsAnalytics,
 ];

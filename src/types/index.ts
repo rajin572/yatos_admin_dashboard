@@ -6,3 +6,5 @@ export * from "./listing.type";
 export * from "./advertisement.type";
 export * from "./payment.type";
 export * from "./review.type";
+export * from "./booking.type";
+export * from "./reportsAnalytics.type";

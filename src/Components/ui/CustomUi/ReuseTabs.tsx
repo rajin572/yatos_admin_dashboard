@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 export interface ReuseTabOption {
   label: string;
   value: string;
+  badge?: number;
 }
 
 interface ReuseTabsProps {
@@ -21,13 +22,18 @@ const ReuseTabs: React.FC<ReuseTabsProps> = ({ options, value, onChange, classNa
           type="button"
           onClick={() => onChange(option.value)}
           className={cn(
-            "px-4 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer",
+            "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer",
             value === option.value
               ? "bg-primary-color text-base-color shadow-sm"
               : "text-secondbase-color hover:text-base-color"
           )}
         >
           {option.label}
+          {typeof option.badge === "number" && option.badge > 0 && (
+            <span className="flex items-center justify-center size-4 rounded-full bg-red-500 text-white text-[10px] font-semibold">
+              {option.badge}
+            </span>
+          )}
         </button>
       ))}
     </div>

@@ -63,10 +63,10 @@ const ReusableTable = <T,>({
     };
 
     return (
-        <div>
+        <div className={cn(pagination && 'pb-5')}>
             <div className={cn(
-                'overflow-x-auto lg:overflow-x-visible',
-                { 'lg:overflow-x-auto': scroll }
+                'overflow-x-auto',
+                scroll ? 'lg:overflow-x-auto' : 'lg:overflow-x-visible'
             )}>
                 <Table className={cn(' rounded-2xl! w-full', { 'min-w-max': scroll })}>
                     {caption && <TableCaption>{caption}</TableCaption>}
