@@ -1,5 +1,5 @@
 "use client";
-import GradientCard from "@/Components/Shared/GradientCard";
+import AuthLayout from "@/Components/Shared/AuthLayout";
 import { Button } from "@/Components/ui/button";
 import { FormInput } from "@/Components/ui/CustomUi/ReuseForm/Form";
 import { FieldGroup } from "@/Components/ui/field";
@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
-import { TbMailFilled } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
 
@@ -68,48 +67,35 @@ const ForgotPassword = () => {
         router("/forgot-password/otp-verify");
     };
     return (
-        <GradientCard from="#2C1C4320" to="#D1B3FF80" className="min-h-screen flex items-center justify-center w-full!" withContainer={false}>
-            <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14 relative z-10 max-w-sm sm:max-w-md lg:max-w-lg">
-                <div className="flex flex-col gap-5 sm:gap-6 lg:gap-8">
-                    {/* Header */}
-                    <div className="flex flex-col items-center gap-2 sm:gap-3 text-center">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-secondary-color/10 flex items-center justify-center">
-                            <TbMailFilled className="size-5 sm:size-6 lg:size-7 text-secondary-color" />
-                        </div>
-                        <div>
-                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-color">Forgot password?</h1>
-                            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mt-2">No worries, we'll send you reset instructions.</p>
-                        </div>
-                    </div>
+        <AuthLayout
+            subtitle="Reset your password"
+            cardTitle="Forgot Password?"
+            cardDescription="Enter your email address and we will send you a verification code"
+        >
+            <form onSubmit={form.handleSubmit(onFinish)}>
+                <FieldGroup>
+                    <FormInput
+                        prefix={<MdOutlineEmail size={18} />}
+                        control={form.control}
+                        name="email"
+                        label="Email Address"
+                        placeholder="admin@yatos.com"
+                        inputClassName="bg-primary-color! border-base-color/30!"
+                    />
+                    <Button variant="secondary" className="w-full" type="submit">
+                        Send OTP Code
+                    </Button>
+                </FieldGroup>
+            </form>
 
-                    {/* Form */}
-                    <form onSubmit={form.handleSubmit(onFinish)}>
-                        <FieldGroup>
-                            <FormInput
-                                prefix={<MdOutlineEmail size={18} />}
-                                control={form.control}
-                                name="email"
-                                label="Email"
-                                placeholder="Enter your email"
-                                inputClassName="py-4! sm:py-5!"
-                            />
-                            <Button variant="secondary" className="w-full py-4 sm:py-5 text-sm sm:text-base lg:text-lg" type="submit">
-                                Reset password
-                            </Button>
-                        </FieldGroup>
-                    </form>
-
-                    {/* Footer */}
-                    <Link
-                        to="/sign-in"
-                        className="flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base text-muted-foreground hover:text-base-color transition-colors"
-                    >
-                        <FaArrowLeftLong className="size-3 sm:size-3.5" />
-                        Back to log in
-                    </Link>
-                </div>
-            </div>
-        </GradientCard>
+            <Link
+                to="/sign-in"
+                className="flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-base-color transition-colors mt-6"
+            >
+                <FaArrowLeftLong className="size-3.5" />
+                Back to Login
+            </Link>
+        </AuthLayout>
     );
 };
 export default ForgotPassword;

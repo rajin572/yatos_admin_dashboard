@@ -9,6 +9,7 @@ import ReviewsRatingsPage from "@/pages/ReviewsRatings/ReviewsRatingsPage";
 import ReportsAnalyticsPage from "@/pages/ReportsAnalytics/ReportsAnalyticsPage";
 import AdminTeamPage from "@/pages/AdminTeam/AdminTeamPage";
 import LegalDocumentsPage from "@/pages/LegalDocuments/LegalDocumentsPage";
+import SettingsPage from "@/pages/Settings/SettingsPage";
 
 import {
   LayoutDashboard,
@@ -22,6 +23,7 @@ import {
   BarChart3,
   ShieldCheck,
   FileText,
+  Settings,
 } from "lucide-react";
 
 export const adminRoutes = [
@@ -93,6 +95,12 @@ export const adminRoutes = [
         url: "legal-documents",
         icon: FileText,
         element: <LegalDocumentsPage />,
+      },
+      {
+        title: "Settings",
+        url: "settings",
+        icon: Settings,
+        element: <SettingsPage />,
       },
     ],
   },

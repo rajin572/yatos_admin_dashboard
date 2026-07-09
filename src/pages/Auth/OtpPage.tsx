@@ -3,10 +3,8 @@ import { useState } from "react";
 import OTPInput from "react-otp-input";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import AuthLayout from "@/Components/Shared/AuthLayout";
 import { Button } from "@/Components/ui/button";
-import GradientCard from "@/Components/Shared/GradientCard";
-import { TbMailFilled } from "react-icons/tb";
-import { FaArrowLeftLong } from "react-icons/fa6";;
 // import { useForgetOtpVerifyMutation, useResendForgetOTPMutation } from "@/redux/features/auth/authApi";
 // import tryCatchWrapper from "@/utils/tryCatchWrapper";
 
@@ -16,13 +14,13 @@ const OTPVerify = () => {
 
   const forgottenEmail = JSON.parse(
     Cookies.get("yatos_main_forgetEmail") || "null"
-  );
+  ) ?? "admin@yatos.com";
 
   // const [otpMatch] = useForgetOtpVerifyMutation();
   // const [resendOtp] = useResendForgetOTPMutation();
 
   const handleOTPSubmit = async () => {
-    if (otp.length === 6) {
+    if (otp.length === 4) {
       // const res = await tryCatchWrapper(
       //   otpMatch,
       //   { body: { otp: otp } },
@@ -59,65 +57,50 @@ const OTPVerify = () => {
   };
 
   return (
-    <GradientCard from="#2C1C4320" to="#D1B3FF80" className="min-h-screen flex items-center justify-center w-full!" withContainer={false}>
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14 relative z-10 max-w-sm sm:max-w-md lg:max-w-lg">
-        <div className="flex flex-col items-center gap-5 sm:gap-6 lg:gap-8 text-center">
-          {/* Header */}
-          <div className="flex flex-col items-center gap-2 sm:gap-3">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-secondary-color/10 flex items-center justify-center">
-              <TbMailFilled className="size-5 sm:size-6 lg:size-7 text-secondary-color" />
-            </div>
-            <div>
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-base-color">Check your email</h1>
-              <p className="text-xs sm:text-sm lg:text-base text-muted-foreground mt-1">
-                We sent a OTP to your email address{" "}
-                <span className="text-secondary-color font-bold">{" "}{forgottenEmail}</span>
-              </p>
-            </div>
-          </div>
+    <AuthLayout
+      subtitle="Reset your password"
+      cardTitle="Enter OTP Code"
+      cardDescription="Enter the 4-digit code sent to your email"
+    >
+      <div className="text-center">
+        <p className="text-sm text-gray-500">We sent a 4-digit code to:</p>
+        <p className="text-sm font-bold text-base-color mt-1">{forgottenEmail}</p>
+      </div>
 
-          <div className="bg-transparent w-full">
-            <div className="flex justify-center items-center">
-              <OTPInput
-                inputStyle="!w-[30px] h-[40px] md:!w-[60px] md:!h-[70px] text-[20px] sm:text-[30px] !bg-primary-color border !border-base-color/30
-                      rounded-lg mr-[10px] sm:mr-[20px] !text-base-color "
-                value={otp}
-                onChange={setOtp}
-                numInputs={6}
-                renderInput={(props) => <input {...props} required />}
-              />
-            </div>
-
-            <Button
-              onClick={handleOTPSubmit}
-              className="py-5 text-base cursor-pointer w-full mt-10"
-            >
-              Verify OTP
-            </Button>
-          </div>
-
-          {/* Resend */}
-          <p className="text-xs sm:text-sm lg:text-base text-muted-foreground">
-            Didn't receive the email?{" "}
-            <span
-              onClick={handleResendOtp}
-              className="text-secondary-color font-semibold cursor-pointer hover:underline"
-            >
-              Click to resend
-            </span>
-          </p>
-
-          {/* Back */}
-          <Link
-            to="/sign-in"
-            className="flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base text-muted-foreground hover:text-base-color transition-colors"
-          >
-            <FaArrowLeftLong className="size-3 sm:size-3.5" />
-            Back to log in
-          </Link>
+      <div className="mt-5">
+        <p className="text-sm font-medium text-base-color text-center mb-3">Enter OTP Code</p>
+        <div className="flex justify-center">
+          <OTPInput
+            inputStyle="!w-[50px] h-[50px] sm:!w-[56px] sm:!h-[56px] text-lg !bg-primary-color border !border-base-color/30 rounded-lg !mr-2.5 last:!mr-0 !text-base-color"
+            value={otp}
+            onChange={setOtp}
+            numInputs={4}
+            renderInput={(props) => <input {...props} required />}
+          />
         </div>
       </div>
-    </GradientCard>
+
+      <p className="text-sm text-gray-500 text-center mt-4">
+        Didn't receive the code?{" "}
+        <span
+          onClick={handleResendOtp}
+          className="text-secondary-color font-semibold cursor-pointer hover:underline"
+        >
+          Resend OTP
+        </span>
+      </p>
+
+      <Button onClick={handleOTPSubmit} variant="secondary" className="w-full mt-5" type="button">
+        Verify OTP
+      </Button>
+
+      <Link
+        to="/forgot-password"
+        className="flex items-center justify-center text-sm font-medium text-base-color hover:text-secondary-color transition-colors mt-4"
+      >
+        Change Email
+      </Link>
+    </AuthLayout>
   );
 };
 export default OTPVerify;

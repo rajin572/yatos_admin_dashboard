@@ -46,7 +46,7 @@ function ReusableModal({
                     {description && <DialogDescription>{description}</DialogDescription>}
                 </DialogHeader>
 
-                <div className="py-4 px-1 max-h-[70vh] lg:max-h-[80vh] overflow-y-auto">{children}</div>
+                <div className="py-4 px-1 max-h-[70vh] overflow-y-auto">{children}</div>
 
                 {(footer || showCloseButton) && (
                     <DialogFooter>

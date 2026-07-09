@@ -11,6 +11,7 @@ export const tagTypes = {
   reportsAnalytics: "ReportsAnalytics",
   adminTeam: "AdminTeam",
   legalDocuments: "LegalDocuments",
+  settings: "Settings",
 };
 
 export const tagTypesList = [
@@ -26,4 +27,5 @@ export const tagTypesList = [
   tagTypes.reportsAnalytics,
   tagTypes.adminTeam,
   tagTypes.legalDocuments,
+  tagTypes.settings,
 ];
