@@ -1,63 +1,54 @@
+import { IGetDashboardOverviewResponse } from "@/types";
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tagTypes";
 
-const dashboard_url = "/dashboard";
-
 const dashboardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // Returns: { earnings, totalPros, totalUsers, bookingsThisMonth, ... }
-    getOverviewStats: builder.query({
+    getDashboardOverview: builder.query<IGetDashboardOverviewResponse, void>({
       query: () => ({
-        url: `${dashboard_url}/overview-stats`,
+        url: "/admin/dashboard/overview",
         method: "GET",
       }),
       providesTags: [tagTypes.dashboard],
     }),
-
-    // Returns: { data: [{ month, value }] }
-    getUserOverviewData: builder.query({
-      query: ({ year }) => ({
-        url: `${dashboard_url}/user-overview?year=${year}`,
-        method: "GET",
+    approveVerification: builder.mutation<unknown, { params: { id: string } }>({
+      query: (req) => ({
+        url: `/admin/dashboard/verifications/${req.params.id}/approve`,
+        method: "PATCH",
       }),
-      providesTags: [tagTypes.dashboard],
+      invalidatesTags: [tagTypes.dashboard],
     }),
-
-    // Returns: { data: [{ month, value }] }
-    getEarningOverviewData: builder.query({
-      query: ({ year }) => ({
-        url: `${dashboard_url}/earning-overview?year=${year}`,
-        method: "GET",
+    rejectVerification: builder.mutation<unknown, { params: { id: string }; body: { reason?: string } }>({
+      query: (req) => ({
+        url: `/admin/dashboard/verifications/${req.params.id}/reject`,
+        method: "PATCH",
+        body: req.body,
       }),
-      providesTags: [tagTypes.dashboard],
+      invalidatesTags: [tagTypes.dashboard],
     }),
-
-    // Returns: { data: [{ id, name, initials, bookings }] }
-    getTopStylists: builder.query({
-      query: () => ({
-        url: `${dashboard_url}/top-stylists`,
-        method: "GET",
+    confirmBooking: builder.mutation<unknown, { params: { id: string } }>({
+      query: (req) => ({
+        url: `/admin/dashboard/bookings/${req.params.id}/confirm`,
+        method: "PATCH",
       }),
-      providesTags: [tagTypes.dashboard],
+      invalidatesTags: [tagTypes.dashboard],
     }),
-
-    // Returns: { data: [{ id, title, subtitle, count, status, actionLabel, actionColor }] }
-    getActionNeeded: builder.query({
-      query: () => ({
-        url: `${dashboard_url}/action-needed`,
-        method: "GET",
+    cancelBooking: builder.mutation<unknown, { params: { id: string } }>({
+      query: (req) => ({
+        url: `/admin/dashboard/bookings/${req.params.id}/cancel`,
+        method: "PATCH",
       }),
-      providesTags: [tagTypes.dashboard],
+      invalidatesTags: [tagTypes.dashboard],
     }),
   }),
 });
 
 export const {
-  useGetOverviewStatsQuery,
-  useGetUserOverviewDataQuery,
-  useGetEarningOverviewDataQuery,
-  useGetTopStylistsQuery,
-  useGetActionNeededQuery,
+  useGetDashboardOverviewQuery,
+  useApproveVerificationMutation,
+  useRejectVerificationMutation,
+  useConfirmBookingMutation,
+  useCancelBookingMutation,
 } = dashboardApi;
 
 export default dashboardApi;

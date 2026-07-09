@@ -10,3 +10,4 @@ export * from "./booking.type";
 export * from "./reportsAnalytics.type";
 export * from "./adminTeam.type";
 export * from "./legalDocuments.type";
+export * from "./dashboard.type";
