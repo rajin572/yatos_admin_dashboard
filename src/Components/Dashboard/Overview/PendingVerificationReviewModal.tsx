@@ -54,11 +54,13 @@ const PendingVerificationReviewModal = ({
     >
       {verification && (
         <div className="flex flex-col gap-4">
-          <InfoField label="Owner" value={verification.ownerName} />
+          <div className="p-4 bg-[#F1F5F9] rounded-lg flex flex-col gap-4">
+            <InfoField label="Owner" value={verification.ownerName} />
 
-          <div className="grid grid-cols-2 gap-4">
-            <InfoField label="Document Type" value={verification.documentType} />
-            <InfoField label="Submitted" value={verification.submittedLabel} />
+            <div className="grid grid-cols-2 gap-4">
+              <InfoField label="Document Type" value={verification.documentType} />
+              <InfoField label="Submitted" value={verification.submittedLabel} />
+            </div>
           </div>
 
           <div className="flex flex-col gap-2">

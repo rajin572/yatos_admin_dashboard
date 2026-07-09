@@ -83,7 +83,7 @@ const BookingDetailPreviewModal = ({
       onOpenChange={(v) => !v && onClose()}
       title="Booking Details"
       description={`Complete information for booking ${booking.bookingCode}`}
-      maxWidth="sm:max-w-md"
+      maxWidth="sm:max-w-2xl"
       footer={
         <div className="flex flex-wrap items-center justify-end gap-3 w-full">
           <Button variant="outline" onClick={onClose}>
@@ -112,7 +112,7 @@ const BookingDetailPreviewModal = ({
             <StatusIcon className={`size-5 shrink-0 ${theme.textClass}`} />
             <div>
               <p className={`text-sm font-semibold ${theme.textClass}`}>{theme.label}</p>
-              <p className="text-xs text-secondbase-color">Booking ID: {booking.bookingCode}</p>
+              <p className="text-xs text-base-color">Booking ID: {booking.bookingCode}</p>
             </div>
           </div>
           <span className={`rounded-full px-3 py-1 text-xs font-semibold shrink-0 ${theme.pillClass}`}>
@@ -120,8 +120,8 @@ const BookingDetailPreviewModal = ({
           </span>
         </div>
 
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="flex items-center gap-3 bg-[#F1F5F9] p-4 rounded-lg">
             <Avatar className="size-9">
               <AvatarFallback className="bg-secondary-color text-white font-semibold text-xs">
                 {getAvatar(booking.customerName)}
@@ -129,29 +129,34 @@ const BookingDetailPreviewModal = ({
             </Avatar>
             <div>
               <p className="text-sm font-medium text-base-color">{booking.customerName}</p>
-              <p className="text-xs text-secondbase-color">{booking.customerEmail}</p>
+              <p className="text-sm text-secondbase-color">{booking.customerEmail}</p>
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-xs text-secondbase-color">Booking Date</p>
-            <p className="flex items-center justify-end gap-1.5 text-sm font-medium text-base-color mt-0.5">
-              <Calendar className="size-3.5 text-secondbase-color" />
-              {booking.bookingDate}
+          <div className="bg-[#F1F5F9] p-4 rounded-lg space-y-2">
+            <p className="text-xs text-base-color/70">Booking Date</p>
+            <p className="flex items-start gap-1.5 text-sm font-medium text-base-color mt-0.5">
+              <Calendar className="size-5 text-secondary-color" />
+              <div>
+                {booking.bookingDate}
+                <p className="text-xs text-base-color/70">{booking.bookedDaysAgoLabel}</p>
+              </div>
             </p>
-            <p className="text-xs text-secondbase-color">{booking.bookedDaysAgoLabel}</p>
           </div>
         </div>
 
-        <div className="rounded-lg bg-background-color p-4">
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-semibold text-base-color">Listing Information</p>
+        <div className="rounded-lg border border-[#E2E8F0] p-4">
+          <p className="text-sm font-semibold text-base-color mb-4">Listing Information</p>
+
+          <div className="flex items-center justify-between mb-3 border-b border-[#E2E8F0] pb-3">
+            <p className="text-base font-medium text-base-color mb-3">
+              {booking.listingTitle}
+            </p>
             {booking.featured && (
               <span className="rounded-full bg-secondary-color/10 text-secondary-color text-xs font-semibold px-2.5 py-0.5">
                 Featured
               </span>
             )}
           </div>
-          <p className="text-sm font-medium text-base-color mb-3">{booking.listingTitle}</p>
           <div className="grid grid-cols-3 gap-4">
             <Field label="Type" value={booking.transportType} />
             <Field label="Duration" value={booking.duration} />
@@ -181,7 +186,7 @@ const BookingDetailPreviewModal = ({
           </div>
         </div>
 
-        <div className="rounded-lg bg-background-color p-4">
+        <div className="rounded-lg border border-[#E2E8F0] p-4">
           <p className="text-sm font-semibold text-base-color mb-3">Booking Timeline</p>
           <div className="flex flex-col gap-3">
             {booking.timeline.map((event) => (
@@ -189,7 +194,7 @@ const BookingDetailPreviewModal = ({
                 <CheckCircle2 className="size-4 text-emerald-500 shrink-0" />
                 <div>
                   <p className="text-sm text-base-color">{event.label}</p>
-                  <p className="text-xs text-secondbase-color">{event.dateLabel}</p>
+                  <p className="text-xs text-base-color/70">{event.dateLabel}</p>
                 </div>
               </div>
             ))}

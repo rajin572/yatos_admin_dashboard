@@ -212,22 +212,26 @@ const OverviewPage = () => {
 
   // const [approveVerification] = useApproveVerificationMutation();
   const handleApproveVerification = async (_verification: IPendingVerification) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   approveVerification,
     //   { params: { id: _verification._id } },
     //   { toastLoadingMessage: "Approving document..." }
     // );
+    // if (res?.success) {
     setIsVerificationOpen(false);
+    // }
   };
 
   // const [rejectVerification] = useRejectVerificationMutation();
   const handleRejectVerification = async (_verification: IPendingVerification) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   rejectVerification,
     //   { params: { id: _verification._id }, body: {} },
     //   { toastLoadingMessage: "Rejecting document..." }
     // );
+    // if (res?.success) {
     setIsVerificationOpen(false);
+    // }
   };
 
   const handleContactCustomer = (booking: IRecentBooking) => {
@@ -236,22 +240,26 @@ const OverviewPage = () => {
 
   // const [confirmBooking] = useConfirmBookingMutation();
   const handleConfirmBooking = async (_booking: IRecentBooking) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   confirmBooking,
     //   { params: { id: _booking._id } },
     //   { toastLoadingMessage: "Confirming booking..." }
     // );
+    // if (res?.success) {
     setIsBookingOpen(false);
+    // }
   };
 
   // const [cancelBooking] = useCancelBookingMutation();
   const handleCancelBooking = async (_booking: IRecentBooking) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   cancelBooking,
     //   { params: { id: _booking._id } },
     //   { toastLoadingMessage: "Cancelling booking..." }
     // );
+    // if (res?.success) {
     setIsBookingOpen(false);
+    // }
   };
 
   return (

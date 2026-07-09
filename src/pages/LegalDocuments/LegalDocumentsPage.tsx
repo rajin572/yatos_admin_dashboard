@@ -38,12 +38,14 @@ const LegalDocumentsPage = () => {
 
   // const [updateLegalDocument] = useUpdateLegalDocumentMutation();
   const handleSave = async (_content: string) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   updateLegalDocument,
     //   { params: { id: selectedDocument?._id }, body: { content: _content } },
     //   { toastLoadingMessage: "Saving changes..." }
     // );
+    // if (res?.success) {
     setIsEditorOpen(false);
+    // }
   };
 
   return (

@@ -29,20 +29,24 @@ const SettingsPage = () => {
 
   // const [updateProfile] = useUpdateProfileMutation();
   const handleUpdateProfile = async (_values: { fullName: string; profileImage?: File }) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   updateProfile,
-    //   { fullName: _values.fullName, profileImage: _values.profileImage },
+    //   { body: { fullName: _values.fullName, profileImage: _values.profileImage } },
     //   { toastLoadingMessage: "Saving changes..." }
     // );
+    // if (res?.success) {
+    // }
   };
 
   // const [changePassword] = useChangePasswordMutation();
   const handleChangePassword = async (_values: { currentPassword: string; newPassword: string }) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   changePassword,
-    //   { currentPassword: _values.currentPassword, newPassword: _values.newPassword },
+    //   { body: { currentPassword: _values.currentPassword, newPassword: _values.newPassword } },
     //   { toastLoadingMessage: "Updating password..." }
     // );
+    // if (res?.success) {
+    // }
   };
 
   return (

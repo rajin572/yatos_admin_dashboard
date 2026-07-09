@@ -59,32 +59,38 @@ const AdminTeamPage = () => {
 
   // const [inviteAdmin] = useInviteAdminMutation();
   const handleInvite = async (_values: { fullName: string; email: string; role: string }) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   inviteAdmin,
-    //   { fullName: _values.fullName, email: _values.email, role: _values.role },
+    //   { body: { fullName: _values.fullName, email: _values.email, role: _values.role } },
     //   { toastLoadingMessage: "Sending invite..." }
     // );
+    // if (res?.success) {
     setIsInviteOpen(false);
+    // }
   };
 
   // const [updateAdmin] = useUpdateAdminMutation();
   const handleEdit = async (_values: { fullName: string; email: string; role: string }) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   updateAdmin,
     //   { params: { id: selectedAdmin?._id }, body: _values },
     //   { toastLoadingMessage: "Updating admin..." }
     // );
+    // if (res?.success) {
     setIsEditOpen(false);
+    // }
   };
 
   // const [removeAdmin] = useRemoveAdminMutation();
   const handleRemove = async (_admin: IAdminTeamMember) => {
-    // await tryCatchWrapper(
+    // const res = await tryCatchWrapper(
     //   removeAdmin,
     //   { params: { id: _admin._id } },
     //   { toastLoadingMessage: "Removing admin..." }
     // );
+    // if (res?.success) {
     setIsRemoveOpen(false);
+    // }
   };
 
   const columns: Column<IAdminTeamMember>[] = [
